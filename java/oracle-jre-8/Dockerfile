@@ -1,5 +1,19 @@
-FROM ubuntu:16.04
+# Copyright (C) 2016 THRON S.p.A.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+FROM ubuntu:trusty
 MAINTAINER THRON Devops <devops@thron.com>
 
 ENV JAVA_VERSION_MAJOR=1 \
@@ -25,5 +39,4 @@ RUN    apt-get update \
     && ln -s /usr/lib/jvm/jre${JAVA_VERSION_MAJOR}.${JAVA_VERSION_MINOR}.${JAVA_VERSION_MAINTENANCE}_${JAVA_VERSION_PATCH} ${JAVA_HOME} \
     && ln -s /usr/lib/jvm/jre${JAVA_VERSION_MAJOR}.${JAVA_VERSION_MINOR}.${JAVA_VERSION_MAINTENANCE}_${JAVA_VERSION_PATCH}/bin/java /usr/bin/java
 
-
-CMD ["/bin/sh"]
+CMD ["/bin/bash"]
