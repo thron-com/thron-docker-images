@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-FROM ubuntu:trusty
+FROM ubuntu:xenial
 MAINTAINER THRON Devops <devops@thron.com>
 
 ENV JAVA_VERSION_MAJOR=1 \
