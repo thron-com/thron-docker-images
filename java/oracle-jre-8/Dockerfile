@@ -22,10 +22,22 @@ ENV JAVA_VERSION_MAJOR=1 \
     JAVA_VERSION_PATCH=102 \
     JAVA_VERSION_BUILD=14 \
     JAVA_HOME=/usr/lib/jvm/default \
+    TERM=xterm \
     PATH=${PATH}:/usr/lib/jvm/default/bin
 
 RUN    apt-get update \
-    && apt-get install -y wget \
+    && apt-get install -y \
+          wget \
+          nano \
+          iputils-ping \
+          net-tools \
+          openssh-server \
+    && echo "[INFO] Configuring SSH" \
+    && sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
+    && sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config \
+    && sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd \
+    && mkdir -p /var/run/sshd \
+    && echo "[INFO] Configuring Java" \
     && mkdir -p /opt \
     && mkdir -p /usr/lib/jvm \
     && wget \
@@ -35,8 +47,9 @@ RUN    apt-get update \
          -O /tmp/java.tar.gz \
     && tar -xzvf /tmp/java.tar.gz -C /usr/lib/jvm \
     && rm /tmp/java.tar.gz \
-    && rm -rf /var/lib/apt/lists/* \
     && ln -s /usr/lib/jvm/jre${JAVA_VERSION_MAJOR}.${JAVA_VERSION_MINOR}.${JAVA_VERSION_MAINTENANCE}_${JAVA_VERSION_PATCH} ${JAVA_HOME} \
-    && ln -s /usr/lib/jvm/jre${JAVA_VERSION_MAJOR}.${JAVA_VERSION_MINOR}.${JAVA_VERSION_MAINTENANCE}_${JAVA_VERSION_PATCH}/bin/java /usr/bin/java
+    && ln -s /usr/lib/jvm/jre${JAVA_VERSION_MAJOR}.${JAVA_VERSION_MINOR}.${JAVA_VERSION_MAINTENANCE}_${JAVA_VERSION_PATCH}/bin/java /usr/bin/java \
+    && echo "[INFO] Cleaning container" \
+    && rm -rf /var/lib/apt/lists/* 
 
 CMD ["/bin/bash"]
