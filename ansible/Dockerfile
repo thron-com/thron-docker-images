@@ -27,7 +27,6 @@ RUN    apt-get update -y \
            libssl-dev \
            libffi-dev \
            python-dev \
-           python-yaml \
            python-pip \
     && pip install -I ansible==${ANSIBLE_VERSION} \
     && apt-get -f -y --auto-remove remove gcc \
