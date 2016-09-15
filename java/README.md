@@ -1,1 +1,0 @@
-[![](https://images.microbadger.com/badges/image/thronspa/java.svg)](http://microbadger.com/images/thronspa/java "Go to details on microbadger.com")
