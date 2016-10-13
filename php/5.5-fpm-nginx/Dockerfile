@@ -28,24 +28,35 @@ RUN    apt-get update \
           nginx \
           openssh-server \
           php5-fpm \
+          php5-dev \
+          php5-curl \
+          php5-xdebug \
+          php-pear \
+          php5-ldap \
+          php5-mcrypt \
+          php5-gd \
           supervisor \
+    && echo "[INFO] Nginx conf" \
+    && mkdir -p /var/www/ \
     && echo "[INFO] Cleaning container" \
     && rm -rf /var/lib/apt/lists/* 
 
-COPY files/etc/etc/docker/start.sh /etc/docker/start.sh
-COPY files/etc/supervisord.conf /etc/supervisord.conf
+COPY files/etc/docker/start.sh /etc/docker/start.sh
+COPY files/etc/supervisor/supervisord.conf /etc/supervisor/supervisord.conf
 COPY files/etc/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY files/etc/php5/fpm/php.ini /etc/php5/fpm/php.ini
 COPY files/etc/php5/fpm/php-fpm.conf /etc/php5/fpm/php-fpm.conf
 COPY files/etc/php5/fpm/pool.d/www.conf /etc/php5/fpm/pool.d/www.conf
 COPY files/etc/php5/mods-available/http.ini /etc/php5/mods-available/http.ini
 
 RUN    chmod 755 /etc/docker/start.sh \
-    && chmod 644 /etc/supervisord.conf \
+    && chmod 644 /etc/supervisor/supervisord.conf \
     && chmod 644 /etc/nginx/nginx.conf \
+    && chmod 644 /etc/php5/fpm/php.ini \
     && chmod 644 /etc/php5/fpm/php-fpm.conf \
     && chmod 644 /etc/php5/fpm/pool.d/www.conf \
     && chmod 644 /etc/php5/mods-available/http.ini 
 
 
     
-CMD ["/bin/bash"]
+CMD ["/etc/docker/start.sh"]
