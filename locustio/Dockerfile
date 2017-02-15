@@ -12,6 +12,7 @@ RUN apk add --update \
     rm -rf /var/cache/apk/* && \
     pip install --no-cache-dir --upgrade --force-reinstall \
         pip \
+        pyzmq \
         locustio
 
 COPY files/etc/docker/start.sh /etc/docker/start.sh
