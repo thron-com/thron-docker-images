@@ -111,7 +111,8 @@ RUN apt-get -y -o Dpkg::Options::="--force-confdef" remove \
  && apt-get -y clean \
  && rm -rf /usr/local/src/nginx* /var/lib/apt/lists/*
 
-RUN apt-get -y -o Dpkg::Options::="--force-confdef" install \
+RUN apt-get update \
+ && apt-get -y -o Dpkg::Options::="--force-confdef" install \
     liblua5.1-0 \
     libxslt1.1
 
