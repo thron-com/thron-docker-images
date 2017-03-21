@@ -20,8 +20,11 @@ ENV NGINX_VERSION=1.10.3 \
 RUN apt-get update \
  && apt-get -y -o Dpkg::Options::="--force-confdef" install \
     build-essential \
+    dos2unix \
+    htop \
     liblua5.1 liblua5.1-dev \
     libxslt1-dev \
+    nano \
     wget
 
 WORKDIR /usr/local/src
