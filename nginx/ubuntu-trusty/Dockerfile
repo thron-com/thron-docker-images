@@ -17,7 +17,7 @@ ENV NGINX_VERSION=1.10.3 \
     NGINX_CONF_PATH=/etc/nginx/nginx.conf \
     NGINX_LOG_DIR=/var/log/nginx
 
-RUN apt-get update \k
+RUN apt-get update \
  && apt-get -y -o Dpkg::Options::="--force-confdef" install \
     build-essential \
     liblua5.1 liblua5.1-dev \
