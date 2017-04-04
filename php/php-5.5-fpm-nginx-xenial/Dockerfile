@@ -21,6 +21,7 @@ ENV TERM=xterm \
 
 RUN    apt-get update \
     && apt-get install -y \
+          cifs-utils \
           wget \
           nano \
           iputils-ping \
