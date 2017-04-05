@@ -17,7 +17,9 @@ FROM ubuntu:trusty
 MAINTAINER THRON Devops <devops@thron.com>
 
 ENV TERM=xterm \
-    PATH=${PATH}:/usr/lib/jvm/default/bin
+    PATH=${PATH}:/usr/lib/jvm/default/bin \
+    AWSCLI_VERSION="1.11.63" \
+    J2CLI_VERSION="0.3.1-0"
 
 RUN    apt-get update \
     && apt-get install -y \
@@ -25,6 +27,7 @@ RUN    apt-get update \
           wget \
           nano \
           iputils-ping \
+          jq \
           net-tools \
           nginx \
           openssh-server \
@@ -36,19 +39,19 @@ RUN    apt-get update \
           php5-ldap \
           php5-mcrypt \
           php5-gd \
+          python-pip \
           supervisor \
+    && pip install -I \
+          awscli==${AWSCLI_VERSION} \
+          j2cli==${J2CLI_VERSION} \
     && echo "[INFO] Nginx conf" \
     && mkdir -p /var/www/ \
     && echo "[INFO] Cleaning container" \
-    && rm -rf /var/lib/apt/lists/* 
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get autoremove -y --purge \
+	      python-dev
 
-COPY files/etc/docker/start.sh /etc/docker/start.sh
-COPY files/etc/supervisor/supervisord.conf /etc/supervisor/supervisord.conf
-COPY files/etc/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY files/etc/php5/fpm/php.ini /etc/php5/fpm/php.ini
-COPY files/etc/php5/fpm/php-fpm.conf /etc/php5/fpm/php-fpm.conf
-COPY files/etc/php5/fpm/pool.d/www.conf /etc/php5/fpm/pool.d/www.conf
-COPY files/etc/php5/mods-available/http.ini /etc/php5/mods-available/http.ini
+COPY files/ /
 
 RUN    chmod 755 /etc/docker/start.sh \
     && chmod 644 /etc/supervisor/supervisord.conf \
@@ -60,4 +63,4 @@ RUN    chmod 755 /etc/docker/start.sh \
 
 
     
-CMD ["/etc/docker/start.sh"]
+ENTRYPOINT ["/etc/docker/start.sh"]
