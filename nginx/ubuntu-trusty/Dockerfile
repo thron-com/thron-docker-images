@@ -108,13 +108,13 @@ RUN apt-get -y -o Dpkg::Options::="--force-confdef" remove \
     build-essential \
     liblua5.1 liblua5.1-dev \
     libxslt1-dev \
+ && apt-get -y -o Dpkg::Options::="--force-confdef" install \
+    jq \
+    liblua5.1-0 \
+    libxslt1.1 \
+    logrotate \
  && apt-get -y autoremove \
  && apt-get -y clean \
  && rm -rf /usr/local/src/nginx* /var/lib/apt/lists/*
-
-RUN apt-get update \
- && apt-get -y -o Dpkg::Options::="--force-confdef" install \
-    liblua5.1-0 \
-    libxslt1.1
 
 CMD ["/bin/bash"]
