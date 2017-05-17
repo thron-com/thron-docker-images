@@ -1,0 +1,9 @@
+#!/bin/sh
+
+echo "starting..."
+
+if [ -z "${MMS_API_KEY}" ]; then echo "Missing MMS_API_KEY variable"; exit 1; fi
+
+envsubst < /etc/mongodb-mms/templates/monitoring-agent.config > /etc/mongodb-mms/monitoring-agent.config
+
+exec mongodb-mms-monitoring-agent --conf /etc/mongodb-mms/monitoring-agent.config
