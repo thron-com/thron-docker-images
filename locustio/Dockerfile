@@ -5,6 +5,8 @@ MAINTAINER Luca Agostini <agostini.luca@gmail.com>
 RUN apk add --update \
         bash \
         g++ \
+        libstdc++ \
+        nginx \
         python \
         python-dev \
         py-pip \
@@ -13,9 +15,11 @@ RUN apk add --update \
     pip install --no-cache-dir --upgrade --force-reinstall \
         pip \
         pyzmq \
-        locustio
+        locustio && \
+    mkdir -p /run/nginx/
 
-COPY files/etc/docker/start.sh /etc/docker/start.sh
+COPY files/ /
+
 RUN chmod +x /etc/docker/start.sh
 
 CMD ["/etc/docker/start.sh"]
