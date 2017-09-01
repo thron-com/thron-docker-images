@@ -11,7 +11,7 @@ This image has already configured Duplicator (https://github.com/agnoster/duplic
 
 ## How to use it
 
-### Available nvironment variable:
+### Available environment variable:
 
 * *CANDIDATE*: the host:port of the new webapp to test
 * *MASTER_PRIMARY*: the host:port of an old versione of the api
