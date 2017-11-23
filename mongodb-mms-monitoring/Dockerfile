@@ -3,7 +3,8 @@ MAINTAINER THRON Devops <devops@thron.com>
 
 ENV TERM=xterm \
     MONGODB_MMS_MONITORING_ARCH=x86_64 \
-    MONGODB_MMS_MONITORING_VERSION=6.1.0.387-1
+    MONGODB_MMS_MONITORING_VERSION=6.1.0.387-1 \
+    MONGODB_MMS_BACKUP_BASEURL=https://api-agents.mongodb.com
 
 RUN apk --update add ca-certificates wget cyrus-sasl-dev libintl &&\
   apk add --virtual build_deps gettext &&\
