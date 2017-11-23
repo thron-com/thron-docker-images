@@ -2,7 +2,8 @@
 
 echo "starting..."
 
-if [ -z "${MMS_API_KEY}" ]; then echo "Missing MMS_API_KEY variable"; exit 1; fi
+if [ -z "${MMS_API_KEY}" ]; then echo "Missing MMS_API_KEY variable"; sleep 2s; exit 1; fi
+if [ -z "${MMS_GROUP_ID}" ]; then echo "Missing MMS_GROUP_ID variable"; sleep 2s; exit 1; fi
 
 envsubst < /etc/mongodb-mms/templates/backup-agent.config > /etc/mongodb-mms/backup-agent.config
 
