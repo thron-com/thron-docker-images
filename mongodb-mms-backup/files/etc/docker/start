@@ -5,6 +5,10 @@ echo "starting..."
 if [ -z "${MMS_API_KEY}" ]; then echo "Missing MMS_API_KEY variable"; sleep 2s; exit 1; fi
 if [ -z "${MMS_GROUP_ID}" ]; then echo "Missing MMS_GROUP_ID variable"; sleep 2s; exit 1; fi
 
-envsubst < /etc/mongodb-mms/templates/backup-agent.config > /etc/mongodb-mms/backup-agent.config
+envsubst < /opt/templates/backup-agent.config > /etc/mongodb-mms/backup-agent.config
+
+export RANDOM_STRING=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1)
+
+envsubst < /opt/templates/hostname > /etc/hostname
 
 exec mongodb-mms-backup-agent -c /etc/mongodb-mms/backup-agent.config

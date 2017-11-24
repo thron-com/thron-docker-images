@@ -7,4 +7,8 @@ if [ -z "${MMS_GROUP_ID}" ]; then echo "Missing MMS_GROUP_ID variable"; sleep 2s
 
 envsubst < /etc/mongodb-mms/templates/monitoring-agent.config > /etc/mongodb-mms/monitoring-agent.config
 
+export RANDOM_STRING=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1)
+
+envsubst < /opt/templates/hostname > /etc/hostname
+
 exec mongodb-mms-monitoring-agent --conf /etc/mongodb-mms/monitoring-agent.config
