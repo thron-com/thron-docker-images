@@ -5,7 +5,7 @@ echo "starting..."
 if [ -z "${MMS_API_KEY}" ]; then echo "Missing MMS_API_KEY variable"; sleep 2s; exit 1; fi
 if [ -z "${MMS_GROUP_ID}" ]; then echo "Missing MMS_GROUP_ID variable"; sleep 2s; exit 1; fi
 
-envsubst < /etc/mongodb-mms/templates/monitoring-agent.config > /etc/mongodb-mms/monitoring-agent.config
+envsubst < /opt/templates/monitoring-agent.config > /etc/mongodb-mms/monitoring-agent.config
 
 export RANDOM_STRING=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1)
 
