@@ -7,8 +7,8 @@ if [ -z "${MMS_GROUP_ID}" ]; then echo "Missing MMS_GROUP_ID variable"; sleep 2s
 
 envsubst < /opt/templates/backup-agent.config > /etc/mongodb-mms/backup-agent.config
 
-export RANDOM_STRING=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1)
-
-envsubst < /opt/templates/hostname > /etc/hostname
+export INSTANCE_ID=$(wget -q -O - http://169.254.169.254/latest/meta-data/instance-id)
+export OLD_HOSTNAME=$(hostname)
+hostname ${SITENAME}-${INSTANCE_ID}-BACKUP-${OLD_HOSTNAME}
 
 exec mongodb-mms-backup-agent -c /etc/mongodb-mms/backup-agent.config
