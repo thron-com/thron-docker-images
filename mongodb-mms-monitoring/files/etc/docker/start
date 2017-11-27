@@ -9,6 +9,6 @@ envsubst < /opt/templates/monitoring-agent.config > /etc/mongodb-mms/monitoring-
 
 export INSTANCE_ID=$(wget -q -O - http://169.254.169.254/latest/meta-data/instance-id)
 export OLD_HOSTNAME=$(hostname)
-hostname ${SITENAME}-${INSTANCE_ID}-MONITORING-${OLD_HOSTNAME}
+hostname ${SITENAME}-MONITORING-${INSTANCE_ID}-${OLD_HOSTNAME}
 
 exec mongodb-mms-monitoring-agent --conf /etc/mongodb-mms/monitoring-agent.config

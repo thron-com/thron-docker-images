@@ -9,6 +9,6 @@ envsubst < /opt/templates/backup-agent.config > /etc/mongodb-mms/backup-agent.co
 
 export INSTANCE_ID=$(wget -q -O - http://169.254.169.254/latest/meta-data/instance-id)
 export OLD_HOSTNAME=$(hostname)
-hostname ${SITENAME}-${INSTANCE_ID}-BACKUP-${OLD_HOSTNAME}
+hostname ${SITENAME}-BACKUP-${INSTANCE_ID}-${OLD_HOSTNAME}
 
 exec mongodb-mms-backup-agent -c /etc/mongodb-mms/backup-agent.config
