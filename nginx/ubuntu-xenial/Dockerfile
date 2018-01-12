@@ -2,15 +2,13 @@ FROM ubuntu:xenial
 
 MAINTAINER THRON Devops <devops@thron.com>
 
-ENV NGINX_VERSION=1.10.3 \
+ENV NGINX_VERSION=1.12.1 \
     NGINX_DEVEL_KIT_MODULE_VERSION=0.3.0 \
-    NGINX_LUA_MODULE_VERSION=0.10.6 \
-    NGINX_ECHO_MODULE_VERSION=0.60 \
-    NGINX_HEADERS_MORE_MODULE_VERSION=0.31 \
-    NGINX_CACHE_PURGE_MODULE_VERSION=2.3 \
+    NGINX_LUA_MODULE_VERSION=0.10.9rc8 \
+    NGINX_HEADERS_MORE_MODULE_VERSION=0.32 \
     NGINX_SET_MISC_MODULE_VERSION=0.31 \
-    OPENSSL_VERSION=1.0.2j \
-    PCRE_VERSION=8.39 \
+    OPENSSL_VERSION=1.0.2l \
+    PCRE_VERSION=8.41 \
     ZLIB_VERSION=1.2.11 \
     NGINX_PREFIX=/usr/local/nginx \
     NGINX_BIN_PATH=/sbin/nginx \
@@ -42,14 +40,10 @@ RUN wget -c -v -O headers-more-nginx-module-${NGINX_HEADERS_MORE_MODULE_VERSION}
  && tar zxvf ngx_devel_kit-${NGINX_DEVEL_KIT_MODULE_VERSION}.tar.gz \
  && wget -c -v -O lua-nginx-module-${NGINX_LUA_MODULE_VERSION}.tar.gz https://github.com/openresty/lua-nginx-module/archive/v${NGINX_LUA_MODULE_VERSION}.tar.gz \
  && tar zxvf lua-nginx-module-${NGINX_LUA_MODULE_VERSION}.tar.gz \
- && wget -c -v -O echo-nginx-module-${NGINX_ECHO_MODULE_VERSION}.tar.gz https://github.com/openresty/echo-nginx-module/archive/v${NGINX_ECHO_MODULE_VERSION}.tar.gz \
- && tar zxvf echo-nginx-module-${NGINX_ECHO_MODULE_VERSION}.tar.gz \
  && wget -c -v http://zlib.net/zlib-${ZLIB_VERSION}.tar.gz \
  && tar zxvf zlib-${ZLIB_VERSION}.tar.gz \
  && wget -c -v ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-${PCRE_VERSION}.tar.gz \
  && tar zxvf pcre-${PCRE_VERSION}.tar.gz \
- && wget -c -v -O ngx_cache_purge-${NGINX_CACHE_PURGE_MODULE_VERSION}.tar.gz https://github.com/FRiCKLE/ngx_cache_purge/archive/${NGINX_CACHE_PURGE_MODULE_VERSION}.tar.gz \
- && tar zxvf ngx_cache_purge-${NGINX_CACHE_PURGE_MODULE_VERSION}.tar.gz \
  && wget -c -v -O set-misc-nginx-module-${NGINX_SET_MISC_MODULE_VERSION}.tar.gz https://github.com/openresty/set-misc-nginx-module/archive/v${NGINX_SET_MISC_MODULE_VERSION}.tar.gz \
  && tar zxvf set-misc-nginx-module-${NGINX_SET_MISC_MODULE_VERSION}.tar.gz \
  && rm -f *.tar.gz
@@ -83,10 +77,8 @@ RUN ./configure \
     --with-http_v2_module \
     --with-stream \
     --add-module=modules/lua-nginx-module-${NGINX_LUA_MODULE_VERSION} \
-    --add-module=modules/echo-nginx-module-${NGINX_ECHO_MODULE_VERSION}  \
     --add-module=modules/ngx_devel_kit-${NGINX_DEVEL_KIT_MODULE_VERSION} \
     --add-module=modules/headers-more-nginx-module-${NGINX_HEADERS_MORE_MODULE_VERSION}  \
-    --add-module=modules/ngx_cache_purge-${NGINX_CACHE_PURGE_MODULE_VERSION} \
     --add-module=modules/set-misc-nginx-module-${NGINX_SET_MISC_MODULE_VERSION} \
     --with-pcre=modules/pcre-${PCRE_VERSION}  \
     --with-zlib=modules/zlib-${ZLIB_VERSION} \
