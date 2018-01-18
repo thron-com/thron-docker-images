@@ -44,7 +44,6 @@ RUN    apt-get update \
     && wget \
          --no-check-certificate \
          --header="Cookie: oraclelicense=accept-securebackup-cookie"  \
-         http://download.oracle.com/otn-pub/java/jdk/8u162-b12server-jre-8u162-linux-x64.tar.gz
          "http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION_MINOR}u${JAVA_VERSION_PATCH}-b${JAVA_VERSION_BUILD}/${BUILD_RND_ID}/server-jre-${JAVA_VERSION_MINOR}u${JAVA_VERSION_PATCH}-linux-x64.tar.gz" \
          -O /tmp/java.tar.gz \
     && tar -xzvf /tmp/java.tar.gz -C /usr/lib/jvm \
