@@ -16,12 +16,11 @@
 FROM ubuntu:xenial
 MAINTAINER THRON Devops <devops@thron.com>
 
-ENV JAVA_VERSION_MAJOR=1 \
-    JAVA_VERSION_MINOR=8 \
+ENV JAVA_VERSION_MINOR=9 \
     JAVA_VERSION_MAINTENANCE=0 \
-    JAVA_VERSION_PATCH=162 \
-    JAVA_VERSION_BUILD=12 \
-    BUILD_RND_ID=0da788060d494f5095bf8624735fa2f1 \
+    JAVA_VERSION_PATCH=4 \
+    JAVA_VERSION_BUILD=11 \
+    BUILD_RND_ID=c2514751926b4512b076cc82f959763f \
     JAVA_HOME=/usr/lib/jvm/default \
     TERM=xterm \
     PATH=${PATH}:/usr/lib/jvm/default/bin
@@ -44,13 +43,12 @@ RUN    apt-get update \
     && wget \
          --no-check-certificate \
          --header="Cookie: oraclelicense=accept-securebackup-cookie"  \
-         http://download.oracle.com/otn-pub/java/jdk/8u162-b12server-jre-8u162-linux-x64.tar.gz
-         "http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION_MINOR}u${JAVA_VERSION_PATCH}-b${JAVA_VERSION_BUILD}/${BUILD_RND_ID}/server-jre-${JAVA_VERSION_MINOR}u${JAVA_VERSION_PATCH}-linux-x64.tar.gz" \
+         "http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION_MINOR}.${JAVA_VERSION_MAINTENANCE}.${JAVA_VERSION_PATCH}+${JAVA_VERSION_BUILD}/${BUILD_RND_ID}/serverjre-${JAVA_VERSION_MINOR}.${JAVA_VERSION_MAINTENANCE}.${JAVA_VERSION_PATCH}_linux-x64_bin.tar.gz" \
          -O /tmp/java.tar.gz \
     && tar -xzvf /tmp/java.tar.gz -C /usr/lib/jvm \
     && rm /tmp/java.tar.gz \
-    && ln -s /usr/lib/jvm/jdk${JAVA_VERSION_MAJOR}.${JAVA_VERSION_MINOR}.${JAVA_VERSION_MAINTENANCE}_${JAVA_VERSION_PATCH} ${JAVA_HOME} \
-    && ln -s /usr/lib/jvm/jdk${JAVA_VERSION_MAJOR}.${JAVA_VERSION_MINOR}.${JAVA_VERSION_MAINTENANCE}_${JAVA_VERSION_PATCH}/bin/java /usr/bin/java \
+    && ln -s /usr/lib/jvm/jdk-${JAVA_VERSION_MINOR}.${JAVA_VERSION_MAINTENANCE}.${JAVA_VERSION_PATCH} ${JAVA_HOME} \
+    && ln -s /usr/lib/jvm/jdk-${JAVA_VERSION_MINOR}.${JAVA_VERSION_MAINTENANCE}.${JAVA_VERSION_PATCH}/bin/java /usr/bin/java \
     && echo "[INFO] Cleaning container" \
     && rm -rf /var/lib/apt/lists/* 
 
