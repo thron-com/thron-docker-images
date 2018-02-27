@@ -1,0 +1,24 @@
+# mongod.conf
+
+# for documentation of all options, see:
+#   http://docs.mongodb.org/manual/reference/configuration-options/
+
+# Where and how to store data.
+storage:
+  dbPath: /data/db-${MONGOD_ID}
+  journal:
+    enabled: true
+  engine: "wiredTiger"
+
+  # where to write logging data.
+systemLog:
+  destination: file
+  logAppend: true
+  path: /var/log/mongod-${MONGOD_ID}.log
+
+# network interfaces
+net:
+  port: ${MONGOD_PORT}
+
+replication:
+    replSetName: "${MONGOD_REPLICA_SET}"
