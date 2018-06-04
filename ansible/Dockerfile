@@ -13,10 +13,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-FROM ubuntu:xenial
+FROM ubuntu:bionic
 MAINTAINER THRON Devops <devops@thron.com>
 
-ENV ANSIBLE_VERSION=2.1.1.0
+ENV ANSIBLE_VERSION=2.5.4
 
 RUN    apt-get update -y \
     && apt-get install --fix-missing \
