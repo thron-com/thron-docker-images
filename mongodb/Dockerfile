@@ -1,4 +1,4 @@
-FROM mongo:3.2.19
+FROM mongo:3.4.17
 
 MAINTAINER THRON DevOps <devops@thron.com>
 
