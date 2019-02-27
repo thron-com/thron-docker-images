@@ -3,6 +3,7 @@
 echo "PROMETHEUS_CONF_URI: set the prometheus URI configuration"
 echo "PROMETHEUS_RETENTION: set the prometheus retention. The default value is '15d'"
 echo "PROMETHEUS_WEB_EXTERNAL_URL: set the prometheus external URL. The default value is '/'"
+echo "PROMETHEUS_PATH: set the prometheus path of database. The default value is '/prometheus'"
 
 if [ -z "${PROMETHEUS_RETENTION}" ]; then 
   echo "Using PROMETHEUS_RETENTION='90d'"
@@ -11,6 +12,11 @@ fi
 if [ -z "${PROMETHEUS_WEB_EXTERNAL_URL}" ]; then 
   echo "Using PROMETHEUS_WEB_EXTERNAL_URL='/'"
   PROMETHEUS_WEB_EXTERNAL_URL="/" 
+fi
+if [ -z "${PROMETHEUS_PATH}" ]; then
+  echo "Using PROMETHEUS_PATH='/prometheus'"
+  PROMETHEUS_PATH="/prometheus"
+  mkdir -p ${PROMETHEUS_PATH}
 fi
 
 
@@ -33,6 +39,6 @@ exec /bin/prometheus \
   --config.file=/etc/prometheus/prometheus.yml \
   --web.external-url=${PROMETHEUS_WEB_EXTERNAL_URL} \
   --storage.tsdb.retention=${PROMETHEUS_RETENTION} \
-  --storage.tsdb.path=/prometheus \
+  --storage.tsdb.path=${PROMETHEUS_PATH} \
   --web.console.libraries=/etc/prometheus/console_libraries \
   --web.console.templates=/etc/prometheus/consoles
