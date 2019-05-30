@@ -1,6 +1,6 @@
 FROM alpine:3.6
 
-ENV PROMETHEUS_VERSION=2.5.0
+ENV PROMETHEUS_VERSION=2.10.0
 
 RUN mkdir -p /opt /etc/prometheus &&\
     apk add --update \
