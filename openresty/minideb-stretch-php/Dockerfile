@@ -56,4 +56,4 @@ RUN mkdir -p /var/www/ /etc/openresty/sites-enabled/ \
     && chmod 644 /etc/php/7.0/fpm/pool.d/www.conf \
     && chmod 644 /etc/php/7.0/mods-available/http.ini
 
-ENTRYPOINT ["/etc/docker/start.sh"]
+CMD ["/etc/docker/start.sh"]
