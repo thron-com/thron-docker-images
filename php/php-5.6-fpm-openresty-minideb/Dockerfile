@@ -48,6 +48,7 @@ RUN mkdir -p /var/www/ /run/php \
     && ln -s /usr/local/openresty/nginx/conf/ /etc/nginx \
     && rm /etc/nginx/*.default \
     && chown www-data:www-data /var/www/ \
+    && chmod 755 /etc/docker/start.sh \
     && chmod 644 /etc/supervisor/supervisord.conf \
     && chmod 644 /etc/openresty/nginx.conf \
     && chmod 644 /etc/php5/fpm/php.ini \
