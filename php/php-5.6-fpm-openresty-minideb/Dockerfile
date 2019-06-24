@@ -31,6 +31,7 @@ RUN install_packages \
        software-properties-common \
        supervisor \
        wget \
+       gettext-base \
     && wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add - \
     && echo "deb https://packages.sury.org/php/ stretch main" | tee /etc/apt/sources.list.d/php.list \
     && install_packages php5.6-curl php5.6-dev php5.6-fpm php5.6-gd php5.6-mcrypt php5.6-xdebug \
@@ -46,7 +47,8 @@ COPY files/ /
 
 RUN mkdir -p /var/www/ /run/php \
     && ln -s /usr/local/openresty/nginx/conf/ /etc/nginx \
-    && rm /etc/nginx/*.default \
+    && rm /etc/nginx/*.default /etc/nginx/fastcgi_params \
+    && ln -s /etc/nginx/fastcgi.conf /etc/nginx/fastcgi_params \
     && chown www-data:www-data /var/www/ \
     && chmod 755 /etc/docker/start.sh \
     && chmod 644 /etc/supervisor/supervisord.conf \
