@@ -34,7 +34,7 @@ RUN install_packages \
        gettext-base \
     && wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add - \
     && echo "deb https://packages.sury.org/php/ stretch main" | tee /etc/apt/sources.list.d/php.list \
-    && install_packages php5.6-curl php5.6-dev php5.6-fpm php5.6-gd php5.6-mcrypt php5.6-xdebug \
+    && install_packages php5.6-curl php5.6-dev php5.6-fpm php5.6-gd php5.6-mcrypt php5.6-xdebug php5.6-xml \
     && wget -qO - https://openresty.org/package/pubkey.gpg | apt-key add - \
     && add-apt-repository -y "deb http://openresty.org/package/debian $(lsb_release -sc) openresty" \
     && apt update \
