@@ -24,9 +24,4 @@ RUN mkdir -p /opt && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-COPY files/ /
-
-RUN dos2unix /etc/docker/start.sh && chmod +x /etc/docker/start.sh && \
-    dos2unix /etc/crontab && chmod 644 /etc/crontab
-
-CMD ["/etc/docker/start.sh"]
+CMD ["/bin/bash"]
