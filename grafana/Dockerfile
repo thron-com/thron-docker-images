@@ -4,5 +4,5 @@ USER root
 WORKDIR /
 RUN apk add --no-cache py-pip dos2unix && pip install awscli
 COPY init.sh init.sh
-RUN dos2unix init.sh
+RUN dos2unix init.sh && chmod +x init.sh
 ENTRYPOINT [ "./init.sh" ]
